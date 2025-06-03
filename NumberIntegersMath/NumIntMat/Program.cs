@@ -7,4 +7,9 @@ int f = 1000000000;
 Console.WriteLine($"The result of {a} divided by {b} is {c}.");
 Console.WriteLine($"The result of {a} + {b} is {d}");
 
-long g = ((long)e + (long)f);
+
+decimal a = 15.5M; // Explicit type
+decimal b = 5.5M; 
+decimal c = a / b;
+Console.WriteLine("the answer is {c}");
+//long g = ((long)e + (long)f);
