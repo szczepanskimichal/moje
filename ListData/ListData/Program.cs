@@ -16,3 +16,5 @@ foreach( var name in names)
     Console.WriteLine($"Hello {name.ToUpper()}");
     
 }
+
+//it seems to work, I just managed to resolve conflicts on GH, that's cool :)
