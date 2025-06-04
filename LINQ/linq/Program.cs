@@ -13,7 +13,8 @@ int[] scores = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
 IEnumerable<int> Query =
     from score in scores
 where score < 100
-select score;
+    //orderby score descending
+    select score;
 
 foreach (int i in Query)
 {
