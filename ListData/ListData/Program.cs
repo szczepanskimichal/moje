@@ -24,13 +24,17 @@
 //Console.WriteLine(names[^1]);//it's the same as names[names.Count-1]!!!Use index from end operator (^) to access the last element in the list/OSTATNI ELEMENT LISTY
 //Console.WriteLine(names[^2]);
 
-var imiona = new List<string> { "Ada", "Michal", "John", "Jane", "Alice", "Bob" }; // Array of strings!!!
-//imiona.Add("Kasia");//LIST<T>
-imiona = [..imiona, "Kasia"]; // Adding an element to an array creates a new array
+//var imiona = new List<string> { "Ada", "Michal", "John", "Jane", "Alice", "Bob" }; // Array of strings!!!
+////imiona.Add("Kasia");//LIST<T>
+//imiona = [..imiona, "Kasia"]; // Adding an element to an array creates a new array
 
-imiona.Sort();
+//imiona.Sort();
+//foreach (var name in imiona)
+//{
+//    Console.WriteLine($"Hello {name.ToLower()}");
+//}
 
-foreach (var name in imiona)
-{
-    Console.WriteLine($"Hello {name.ToLower()}");
-}
+var numbers = new List<int> { 11, 32, 43, 54, 65 };
+Console.WriteLine(numbers.IndexOf(32));
+numbers.Sort();
+Console.WriteLine(numbers.IndexOf(65));
