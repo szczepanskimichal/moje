@@ -10,13 +10,14 @@ using System.Linq;
 int[] scores = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
 
 //query expression syntax
-IEnumerable<int> Query =
+IEnumerable<string> Query =
     from score in scores
-where score < 100
-    //orderby score descending
-    select score;
+    where score < 100
+    orderby score descending
+    //select score;
+    select $"Score: {score}";
 
-foreach (int i in Query)
+foreach (string s in Query)
 {
-    Console.WriteLine("||" + i + "||");
+    Console.WriteLine("||" + s + "||");
 }
