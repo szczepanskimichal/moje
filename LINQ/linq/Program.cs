@@ -17,6 +17,8 @@ IEnumerable<string> Query =
     //select score;
     select $"Score: {score}";
 
+var scores2 = scores.Where(score => score < 100).OrderByDescending(score => score);
+
 foreach (string s in Query)
 {
     Console.WriteLine("||" + s + "||");
