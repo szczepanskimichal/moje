@@ -3,9 +3,11 @@
     public  int Points; // ze static dzialaja naraz wszystkie guziki!!! tak nie moze byc, musisz wiedziec ze stsic uzywa sie z rozwaga!!!
     public int Upgrade;
     public char ClickCharakter;
+    public string PlayerName;
 
-    public Clicker(char clickCharakter)
+    public Clicker(char clickCharakter, string playerName="")
     {
+        PlayerName = playerName;
         ClickCharakter = clickCharakter; 
         Upgrade = 1;
         Points = 0;
