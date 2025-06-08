@@ -1,7 +1,10 @@
-﻿public class StaticClicker
+﻿//using Clicker;
+
+public class StaticClicker
 {
-    public static int Points = 0;
-    public static int Upgrade = 1;
+    //public static int Points = 0;
+    //public static int Upgrade = 1;
+    public static SimpleClicker SimpleClicker = new SimpleClicker();
     public static void Run()
     {
         //var points = 0;
@@ -20,14 +23,14 @@
     {
         if (command.KeyChar == 'a')
         {
-            Points += Upgrade;
+            SimpleClicker.Points += SimpleClicker.Upgrade;
         }
         else if (command.KeyChar == 'A')
         {
-            if (Points > 0)
+            if (SimpleClicker.Points > 0) 
             {
-                Upgrade++;
-                Points -= 10;
+                SimpleClicker.Upgrade++;
+                SimpleClicker.Points -= 10;
             }
         }
     }
@@ -35,6 +38,6 @@
     private static void ShowPoints()
     {
         Console.Clear();
-        Console.WriteLine($"Klikker A Du har {Points} poeng. (a=klikk, A=upgrade");
+        Console.WriteLine($"Klikker A Du har {SimpleClicker.Points} poeng. (a=klikk, A=upgrade");
     }
 }
