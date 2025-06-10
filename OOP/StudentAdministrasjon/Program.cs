@@ -41,6 +41,8 @@
                         {
                             student.SkrivUtInfo();
                         }
+                        NewStudent(studenter);
+
                         break;
                     case "2":
                         Console.WriteLine("FagListe:");
@@ -64,6 +66,30 @@
                         Console.WriteLine("Ugyldig valg, prøv igjrn.");
                         break;
                 }
+            }
+        }
+
+        private static void NewStudent(List<Student> studenter)
+        {
+            Console.WriteLine("Vil du legge til en ny student? (y/n): ");
+            string addStudent = Console.ReadLine();
+            if (addStudent.ToLower() == "y")
+            {
+                Console.Write("Navn: ");
+                string name = Console.ReadLine();
+                Console.Write("Alder: ");
+                int alder = int.Parse(Console.ReadLine());
+                Console.Write("Studieprogram: ");
+                string studieprogram = Console.ReadLine();
+                Console.Write("StudentID: ");
+                string studentID = Console.ReadLine();
+                Console.Write("Fag: ");
+                string fag = Console.ReadLine();
+                Console.Write("Karakter: ");
+                string karakterverdi = Console.ReadLine();
+
+                studenter.Add(new Student(name, alder, studieprogram, studentID, fag, karakterverdi));
+                Console.WriteLine("En ny student er lagt til!");
             }
         }
     }
