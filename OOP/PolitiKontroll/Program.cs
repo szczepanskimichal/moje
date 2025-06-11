@@ -27,6 +27,9 @@ class Sjafor
 abstract class Politimann
 {
     // Każdy policjant musi mieć własną metodę Check
+    //Check to metoda, która wymusza na każdej klasie policjanta własną logikę kontroli kierowcy.
+    /// /Dzięki temu każdy policjant sprawdza coś innego, ale wywołuje ich w taki sam sposób.
+    /// To klasyczny przykład polimorfizmu w programowaniu obiektowym!!!
     public abstract void Check(Sjafor sjafor);
 }
 
