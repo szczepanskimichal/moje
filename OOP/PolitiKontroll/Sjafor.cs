@@ -6,27 +6,23 @@ using System.Threading.Tasks;
 
 namespace PolitiKontroll
 {
-    internal class Sjafor
+    public class Sjafor
     {
-      
-
         public string Name { get; set; }
         public bool Seatbelt { get; set; }
         public bool UsesPhone { get; set; }
         public bool DriverLicense { get; set; }
-        public double Alko { get; set; }
-        public int Speed { get; set; }
+        public double AlcoholLevel { get; set; } // promille
+        public int Speed { get; set; } // km/t
 
-        // Konstruktor!!!
-  public Sjafor(string name, bool seatbelt, bool usesPhone, bool driverLicense, double alko, int speed)
+        public Sjafor(string name, bool seatbelt, bool usesPhone, bool driverLicense, double alcoholLevel, int speed)
         {
             Name = name;
             Seatbelt = seatbelt;
             UsesPhone = usesPhone;
             DriverLicense = driverLicense;
-            Alko = alko;
-            Alko = speed;
+            AlcoholLevel = alcoholLevel;
+            Speed = speed;
         }
-
     }
 }
