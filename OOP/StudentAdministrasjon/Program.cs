@@ -7,22 +7,22 @@
             List<Student> studenter = new()
                         {
                             new Student("Michal", 30, "IT", "876358", "DAT100", "A"),
-                            new Student("Ole", 11, "IT",  "876358", "DAT100", "b")
-                        };
+                            new Student("Ole", 11, "IT",  "876358", "DAT100", "b"),
+new Student("MIA", 44, "IT", "876323", "DAT300", "C")                        };
 
             List<Fag> fagliste = new()
                         {
                             new Fag("MAT200", "Mathematics", 5, "Mathematics"),
-                            new Fag("DAT100", "Programming", 10, "Programming")
-                        };
+                            new Fag("DAT100", "Programming", 10, "Programming"),
+new Fag("DAT300", "Biology", 15, "Biology")3                        };
 
             // Tworzymy oceny (kto co dostał z jakiego przedmiotu)    
             List<Karakter> karakterer = new()
                         {
                             new Karakter(studenter[0], fagliste[0], "A"),
                             new Karakter(studenter[0], fagliste[1], "B"),
+                            new Karakter(student[1]), fagliste[2], "A")
                         };
-
             bool play = true;
             while (play)
             {
