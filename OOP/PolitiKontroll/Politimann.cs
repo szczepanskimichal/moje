@@ -8,6 +8,6 @@ namespace PolitiKontroll
 {
     public abstract class Politimann
     {
-        //public abstract void KontrollerSjafor(Sjafor sjafor);
+        public abstract void KontrollerSjafor(Sjafor sjafor);
     }
 }
