@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace FriendFace
 {
-    // Klasa reprezentująca użytkownika/profil
     public class User
     {
         public string Name { get; }
@@ -25,37 +24,50 @@ namespace FriendFace
 
         public void AddFriend(User friend)
         {
-            if (friend == null || friend == this)
+            if (friend == null)
             {
-                Console.WriteLine("Kan ikke legge til denne brukeren som venn.");
+                Console.WriteLine("Ugyldig venn.");
                 return;
             }
+
+            if (friend == this)
+            {
+                Console.WriteLine("Du kan ikke legge til deg selv som venn.");
+                return;
+            }
+
             if (Friends.Contains(friend))
             {
                 Console.WriteLine($"{friend.Name} er allerede din venn.");
                 return;
             }
+
             Friends.Add(friend);
             Console.WriteLine($"{friend.Name} er nå lagt til som venn.");
         }
 
         public void RemoveFriend(User friend)
         {
-            if (Friends.Remove(friend))
+            if (Friends.Contains(friend))
+            {
+                Friends.Remove(friend);
                 Console.WriteLine($"{friend.Name} er fjernet fra vennelisten.");
+            }
             else
+            {
                 Console.WriteLine($"{friend.Name} er ikke på vennelisten din.");
+            }
         }
 
         public void PrintProfile()
         {
-            Console.WriteLine($"\n--- Profil for {Name} ---");
+            Console.WriteLine("\n--- Profil ---");
             Console.WriteLine($"Navn: {Name}");
             Console.WriteLine($"Alder: {Age}");
             Console.WriteLine($"Fødselsdato: {BirthDate}");
             Console.WriteLine($"E-post: {Email}");
             Console.WriteLine($"Bio: {Bio}");
-            Console.WriteLine("-------------------------\n");
+            Console.WriteLine("---------------\n");
         }
     }
 
@@ -63,10 +75,8 @@ namespace FriendFace
     {
         static void Main(string[] args)
         {
-            // Opprett hovedbruker (innlogget)
             var mainUser = new User("Hovedbruker", 25, new DateOnly(1999, 1, 1), "main@friendface.com", "Hei! Dette er min profil.");
 
-            // Opprett flere brukere på plattformen
             var allUsers = new List<User>
             {
                 mainUser,
@@ -87,43 +97,61 @@ namespace FriendFace
                 Console.WriteLine("5. Vis min profil");
                 Console.WriteLine("6. Avslutt");
                 Console.Write("Ditt valg: ");
-                string valg = Console.ReadLine();
+                string input = Console.ReadLine();
 
-                if (valg == "1")
+                if (input == "1")
                 {
-                    Console.WriteLine("\nTilgjengelige brukere:");
+                    Console.WriteLine("Tilgjengelige brukere:");
                     for (int i = 0; i < allUsers.Count; i++)
                     {
-                        if (allUsers[i] != mainUser && !mainUser.Friends.Contains(allUsers[i]))
-                            Console.WriteLine($"{i}: {allUsers[i].Name}");
+                        var user = allUsers[i];
+                        if (user != mainUser && !mainUser.Friends.Contains(user))
+                        {
+                            Console.WriteLine($"{i}: {user.Name}");
+                        }
                     }
-                    Console.Write("Skriv inn nummeret til brukeren du vil legge til som venn: ");
-                    if (int.TryParse(Console.ReadLine(), out int idx) && idx >= 0 && idx < allUsers.Count && allUsers[idx] != mainUser)
+
+                    Console.Write("Skriv inn nummeret til brukeren du vil legge til: ");
+                    string inputIndex = Console.ReadLine();
+                    int index;
+                    bool success = int.TryParse(inputIndex, out index);
+
+                    if (success && index >= 0 && index < allUsers.Count && allUsers[index] != mainUser)
                     {
-                        mainUser.AddFriend(allUsers[idx]);
+                        mainUser.AddFriend(allUsers[index]);
                     }
                     else
                     {
                         Console.WriteLine("Ugyldig valg.");
                     }
                 }
-                else if (valg == "2")
+                else if (input == "2")
                 {
                     if (mainUser.Friends.Count == 0)
                     {
                         Console.WriteLine("Du har ingen venner å fjerne.");
                         continue;
                     }
+
                     Console.WriteLine("\nDine venner:");
                     for (int i = 0; i < mainUser.Friends.Count; i++)
-                        Console.WriteLine($"{i}: {mainUser.Friends[i].Name}");
-                    Console.Write("Skriv inn nummeret til vennen du vil fjerne: ");
-                    if (int.TryParse(Console.ReadLine(), out int idx) && idx >= 0 && idx < mainUser.Friends.Count)
                     {
-                        var friendToRemove = mainUser.Friends[idx];
-                        Console.Write($"For å bekrefte, skriv inn navnet til vennen ({friendToRemove.Name}): ");
+                        Console.WriteLine($"{i}: {mainUser.Friends[i].Name}");
+                    }
+
+                    Console.Write("Skriv inn nummeret til vennen du vil fjerne: ");
+                    string inputIndex = Console.ReadLine();
+                    int index;
+                    bool success = int.TryParse(inputIndex, out index);
+
+                    if (success && index >= 0 && index < mainUser.Friends.Count)
+                    {
+                        var friendToRemove = mainUser.Friends[index];
+
+                        Console.Write($"Bekreft navnet på vennen ({friendToRemove.Name}): ");
                         string confirmation = Console.ReadLine();
-                        if (string.Equals(confirmation, friendToRemove.Name, StringComparison.OrdinalIgnoreCase))
+
+                        if (confirmation.ToLower() == friendToRemove.Name.ToLower())
                         {
                             mainUser.RemoveFriend(friendToRemove);
                         }
@@ -134,45 +162,57 @@ namespace FriendFace
                     }
                     else
                     {
-                        Console.WriteLine("Ugyldig valg.");
+                        Console.WriteLine("Ugyldig nummer.");
                     }
                 }
-                else if (valg == "3")
+                else if (input == "3")
                 {
                     if (mainUser.Friends.Count == 0)
+                    {
                         Console.WriteLine("Du har ingen venner.");
+                    }
                     else
                     {
                         Console.WriteLine("\nDine venner:");
-                        foreach (var v in mainUser.Friends)
-                            Console.WriteLine($"- {v.Name}");
+                        foreach (var friend in mainUser.Friends)
+                        {
+                            Console.WriteLine($"- {friend.Name}");
+                        }
                     }
                 }
-                else if (valg == "4")
+                else if (input == "4")
                 {
                     if (mainUser.Friends.Count == 0)
                     {
                         Console.WriteLine("Du har ingen venner.");
                         continue;
                     }
+
                     Console.WriteLine("\nDine venner:");
                     for (int i = 0; i < mainUser.Friends.Count; i++)
-                        Console.WriteLine($"{i}: {mainUser.Friends[i].Name}");
-                    Console.Write("Skriv inn nummeret til vennen du vil se profilen til: ");
-                    if (int.TryParse(Console.ReadLine(), out int idx) && idx >= 0 && idx < mainUser.Friends.Count)
                     {
-                        mainUser.Friends[idx].PrintProfile();
+                        Console.WriteLine($"{i}: {mainUser.Friends[i].Name}");
+                    }
+
+                    Console.Write("Skriv inn nummeret til vennen du vil se: ");
+                    string inputIndex = Console.ReadLine();
+                    int index;
+                    bool success = int.TryParse(inputIndex, out index);
+
+                    if (success && index >= 0 && index < mainUser.Friends.Count)
+                    {
+                        mainUser.Friends[index].PrintProfile();
                     }
                     else
                     {
                         Console.WriteLine("Ugyldig valg.");
                     }
                 }
-                else if (valg == "5")
+                else if (input == "5")
                 {
                     mainUser.PrintProfile();
                 }
-                else if (valg == "6")
+                else if (input == "6")
                 {
                     Console.WriteLine("Avslutter FriendFace...");
                     break;
