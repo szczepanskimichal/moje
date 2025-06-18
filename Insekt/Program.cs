@@ -1,5 +1,6 @@
 ﻿using System; // Import the System namespace for basic .NET types and console operations
 using System.Collections.Generic; // Import generic collections like List<T>
+//using Xunit; // Import Xunit for unit testing
 
 namespace Insekt // Define the namespace for the application
 {
@@ -74,12 +75,26 @@ namespace Insekt // Define the namespace for the application
                 {
                     Console.WriteLine("Ugyldig valg."); // Inform about invalid choice
                 }
+
             }
+           
         }
     }
 
-    // Base class for all insects!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public class Bug
+    // Interface for all insects
+    public interface IInsect
+    {
+        string Navn { get; set; }
+        bool KanBite { get; set; }
+        int AntallBein { get; set; }
+        bool KanFly { get; set; }
+        string Plage { get; set; }
+        string GoodStuff { get; set; }
+        void VisInfo();
+    }
+
+    // Base class for all insects
+    public class Bug : IInsect
     {
         public string Navn { get; set; } // Name of the insect
         public bool KanBite { get; set; } // Can it bite
@@ -170,3 +185,17 @@ namespace Insekt // Define the namespace for the application
         }
     }
 }
+//    // Unit tests for Bug classes
+//    public class BugTests
+//    {
+//        [Fact]
+//        public void Mygg_HasCorrectProperties()
+//        {
+//            var mygg = new Mygg();
+//            Assert.Equal("Mygg", mygg.Navn);
+//            Assert.True(mygg.KanBite);
+//            Assert.Equal(6, mygg.AntallBein);
+//            Assert.True(mygg.KanFly);
+//        }
+//    }
+//}
